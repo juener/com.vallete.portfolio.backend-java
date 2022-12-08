@@ -1,5 +1,8 @@
 package com.vallete.portfolio.backendjava.service;
 
+import java.util.Optional;
+import java.util.UUID;
+
 import com.vallete.portfolio.backendjava.model.entity.Login;
 
 public interface LoginService {
@@ -9,4 +12,6 @@ public interface LoginService {
 	Login saveLogin(Login login);
 	
 	void validateEmail(String email);
+	
+	Login getLoginById(UUID id);
 }

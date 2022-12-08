@@ -1,5 +1,6 @@
 package com.vallete.portfolio.backendjava.model.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
 
@@ -10,10 +11,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Transaction {
 
 	@Id
@@ -24,15 +31,13 @@ public class Transaction {
 	
 	private String observation;
 	
-	private Double value;
+	private BigDecimal value;
 	
 	@Enumerated(value = EnumType.STRING)
 	private TransactionType type;
 	
 	@Enumerated(value = EnumType.STRING)
 	private TransactionStatus status;
-	
-	private boolean isDone;
 	
 	private Date dueDate;
 	
