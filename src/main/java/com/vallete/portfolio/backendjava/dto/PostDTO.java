@@ -1,7 +1,5 @@
 package com.vallete.portfolio.backendjava.dto;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.UUID;
@@ -15,25 +13,16 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TransactionDTO {
-	
+public class PostDTO {
+
 	private UUID id;
 	
-	private String name;
+	private String title;
 	
-	private String observation;
-	
-	private BigDecimal value;
-	
-	private UUID user;
-	
-	private String type;
-	
-	private String status;
-	
-	private LocalDate dueDate;
+	private String body;
 	
 	@Builder.Default
 	private LocalDateTime creationDate = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
 	
+	private UUID user;
 }

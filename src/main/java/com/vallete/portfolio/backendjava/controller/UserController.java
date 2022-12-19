@@ -3,13 +3,11 @@ package com.vallete.portfolio.backendjava.controller;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.vallete.portfolio.backendjava.exception.AuthenticationException;
 import com.vallete.portfolio.backendjava.exception.BusinessException;
 import com.vallete.portfolio.backendjava.model.User;
-import com.vallete.portfolio.backendjava.model.TransactionType;
 import com.vallete.portfolio.backendjava.repository.UserRepository;
 
 import jakarta.transaction.Transactional;

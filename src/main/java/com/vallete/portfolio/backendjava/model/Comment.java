@@ -1,7 +1,6 @@
 package com.vallete.portfolio.backendjava.model;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.UUID;
 
 import jakarta.persistence.Entity;
@@ -27,7 +26,7 @@ public class Comment {
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private UUID id;
 	
-	private String text;
+	private String body;
 	
 	private LocalDateTime creationDate;
 	

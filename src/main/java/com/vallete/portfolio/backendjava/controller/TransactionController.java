@@ -2,14 +2,11 @@ package com.vallete.portfolio.backendjava.controller;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.ExampleMatcher.StringMatcher;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.vallete.portfolio.backendjava.exception.BusinessException;
@@ -28,8 +25,9 @@ public class TransactionController implements TransactionControllerInterface {
 		this.transactionRepository = transactionRepository;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Transaction> seek(Transaction transactionFilter) {
+	public List<Transaction> search(Transaction transactionFilter) {
 
 		Example example = Example.of(transactionFilter,
 				ExampleMatcher.matching().withIgnoreCase().withStringMatcher(StringMatcher.CONTAINING));
@@ -48,7 +46,7 @@ public class TransactionController implements TransactionControllerInterface {
 
 	private void validate(Transaction transaction) {
 
-		if (transaction.getName() == null || transaction.getStatus() == null || transaction.getName().trim() == "")
+		if (transaction.getName() == null || transaction.getName().trim() == "" || transaction.getStatus() == null)
 			throw new BusinessException("Some fields are required: Name, Status, //etc");
 		// add more filters
 

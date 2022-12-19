@@ -3,7 +3,6 @@ package com.vallete.portfolio.backendjava.api;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,7 +43,8 @@ public class UserAPI {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
-
+	
+	@SuppressWarnings("unchecked")
 	@PostMapping("/user/register")
 	public ResponseEntity register(@RequestBody UserDTO userDTO) {
 		User user = User.builder().name(userDTO.getName()).email(userDTO.getEmail()).password(userDTO.getPassword())

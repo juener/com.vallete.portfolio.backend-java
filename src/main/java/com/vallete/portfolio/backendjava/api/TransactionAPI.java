@@ -39,7 +39,7 @@ public class TransactionAPI {
 	}
 	
 	@GetMapping("/transaction")
-	public ResponseEntity seekTransactionsUsingFilter(
+	public ResponseEntity searchTransactionsUsingFilter(
 			// for all optionals, use @RequestParam java.util.Map<String, String> params
 			@RequestParam(value = "name", required = false) String name,
 			@RequestParam(value = "observation", required = false) String observation,
@@ -53,7 +53,7 @@ public class TransactionAPI {
 		User user = userController.getUserById(idUser);
 		transactionFilter.setUser(user);
 
-		List<Transaction> transactions = transactionController.seek(transactionFilter);
+		List<Transaction> transactions = transactionController.search(transactionFilter);
 		return ResponseEntity.ok(transactions);
 	}
 
