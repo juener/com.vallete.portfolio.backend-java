@@ -1,120 +1,88 @@
 package com.vallete.portfolio.backendjava.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.http.HttpStatusCode;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
-import com.vallete.portfolio.backendjava.model.entity.Login;
-import com.vallete.portfolio.backendjava.model.entity.Transaction;
-import com.vallete.portfolio.backendjava.model.entity.TransactionStatus;
-import com.vallete.portfolio.backendjava.model.entity.TransactionType;
-import com.vallete.portfolio.backendjava.service.LoginService;
-import com.vallete.portfolio.backendjava.service.TransactionService;
-
-import lombok.RequiredArgsConstructor;
-
-import com.vallete.portfolio.backendjava.dto.TransactionDTO;
 import com.vallete.portfolio.backendjava.exception.BusinessException;
+import com.vallete.portfolio.backendjava.model.Transaction;
+import com.vallete.portfolio.backendjava.model.TransactionType;
+import com.vallete.portfolio.backendjava.repository.TransactionRepository;
 
-@RestController
-@RequestMapping("/portfolio")
-@RequiredArgsConstructor
-public class TransactionController {
+import jakarta.transaction.Transactional;
 
-	private final TransactionService transactionService;
-	private final LoginService loginService;
+@Service
+public class TransactionController implements TransactionControllerInterface {
 
-	// or change the variables as final and add @RequiredArgsConstructor above the
-	// class
-//	public TransactionController(TransactionService transactionService) {
-//		this.transactionService = transactionService;
-//		this.loginService = loginService;
-//	}
+	private TransactionRepository transactionRepository;
 
-	@GetMapping("/transaction")
-	public ResponseEntity seekTransactionsUsingFilter(
-			// for all optionals, we could do @RequestParam java.util.Map<String, String>
-			// params
-			@RequestParam(value = "name", required = false) String name,
-			@RequestParam(value = "observation", required = false) String observation,
-			// add more fields
-			@RequestParam("login") UUID login // login is required
-	) {
-		Transaction transactionFilter = new Transaction();
-		transactionFilter.setName(name);
-		transactionFilter.setObservation(observation);
-
-		Login objLogin = loginService.getLoginById(login);
-		transactionFilter.setLogin(objLogin);
-
-		List<Transaction> transactions = transactionService.seek(transactionFilter);
-		return ResponseEntity.ok(transactions);
+	public TransactionController(TransactionRepository transactionRepository) {
+		this.transactionRepository = transactionRepository;
 	}
 
-	@PostMapping("/transaction")
-	@PutMapping("/transaction")
-	public ResponseEntity saveTransaction(@RequestBody TransactionDTO transactionDTO) {
-		try {
-			Transaction transaction = convertDTO(transactionDTO);
-			transaction = transactionService.save(transaction);
-			return ResponseEntity.ok(transaction);
-		} catch (BusinessException e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
-		}
+	@Override
+	public List<Transaction> seek(Transaction transactionFilter) {
+
+		Example example = Example.of(transactionFilter,
+				ExampleMatcher.matching().withIgnoreCase().withStringMatcher(StringMatcher.CONTAINING));
+		return transactionRepository.findAll(example);
+
 	}
 
-//	@PutMapping("/transaction")
-//	public ResponseEntity update(@PathVariable("id") UUID id, @RequestBody TransactionDTO transactionDTO) {
-//		return transactionService.getTransactionById(id).map(obj -> {
-//			try {
-//				Transaction transaction = convertDTO(transactionDTO);
-//				transaction.setId(obj.getId());
-//				transactionService.update(transaction);
-//				return ResponseEntity.ok(transaction);
-//			} catch (BusinessException e) {
-//				return ResponseEntity.badRequest().body(e.getMessage());
-//			}
-//		}).orElseGet(() -> new ResponseEntity("Transaction not found.", HttpStatusCode.valueOf(400)));
-//	}
+	@Override
+	@Transactional
+	public Transaction save(Transaction transaction) {
 
-	@DeleteMapping("/transaction/{transactionId}")
-	public ResponseEntity deleteByTransactionId(@PathVariable("transactionId") UUID transactionId) {
-		transactionService.deleteByTransactionId(transactionId);
-		return ResponseEntity.ok("Transaction has been deleted.");
+		validate(transaction);
+		return transactionRepository.save(transaction);
+
 	}
 
-	private Transaction convertDTO(TransactionDTO transactionDTO) {
-		Transaction transaction = new Transaction();
+	private void validate(Transaction transaction) {
 
-		transaction.setId(transactionDTO.getId());
-		transaction.setName(transactionDTO.getName());
-		transaction.setObservation(transactionDTO.getObservation());
-		transaction.setValue(transactionDTO.getValue());
+		if (transaction.getName() == null || transaction.getStatus() == null || transaction.getName().trim() == "")
+			throw new BusinessException("Some fields are required: Name, Status, //etc");
+		// add more filters
 
-		Login login = loginService.getLoginById(transactionDTO.getLogin());
-		transaction.setLogin(login);
+	}
 
-		if (transactionDTO.getType() != null)
-			transaction.setType(TransactionType.valueOf(transactionDTO.getType()));
+	@Override
+	@Transactional
+	public Transaction update(Transaction transaction) {
 
-		if (transactionDTO.getStatus() != null)
-			transaction.setStatus(TransactionStatus.valueOf(transactionDTO.getStatus()));
+		validate(transaction);
+		return transactionRepository.save(transaction);
 
-		transaction.setDueDate(transactionDTO.getDueDate());
-		transaction.setRegistrationDate(transactionDTO.getRegistrationDate());
+	}
 
-		return transaction;
+	@Override
+	@Transactional
+	public void deleteByTransactionId(UUID id) {
+
+		transactionRepository.deleteById(id);
+
+	}
+
+	@Override
+	public BigDecimal getBalanceByUserAndType(UUID idUser) {
+
+		BigDecimal totalRevenue = transactionRepository.getBalanceByUserAndType(idUser, TransactionType.REVENUE);
+		if (totalRevenue == null)
+			totalRevenue = BigDecimal.ZERO;
+
+		BigDecimal totalSpent = transactionRepository.getBalanceByUserAndType(idUser, TransactionType.SPENT);
+		if (totalSpent == null)
+			totalSpent = BigDecimal.ZERO;
+
+		return totalRevenue.subtract(totalSpent); // return the balance from the user
+
 	}
 }

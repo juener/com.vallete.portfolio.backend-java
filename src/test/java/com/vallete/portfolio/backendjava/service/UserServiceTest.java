@@ -12,29 +12,30 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.vallete.portfolio.backendjava.controller.UserControllerInterface;
 import com.vallete.portfolio.backendjava.exception.BusinessException;
-import com.vallete.portfolio.backendjava.model.entity.Login;
-import com.vallete.portfolio.backendjava.model.repository.LoginRepository;
+import com.vallete.portfolio.backendjava.model.User;
+import com.vallete.portfolio.backendjava.repository.UserRepository;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
-public class LoginServiceTest {
+public class UserServiceTest {
 
 	@Autowired
-	LoginService loginService;
+	UserControllerInterface userService;
 
 	@Autowired
-	LoginRepository loginRepository;
+	UserRepository userRepository;
 
 	@Test()
 	public void mustThrowErrorIfTheEmailIsAlreadyRegistered() {
 		Assertions.assertThrows(BusinessException.class, () -> { //or .assertDoesNotThrow
 			// scenario
-			Login login = Login.builder().name("name test").email("test@testLoginService2.com").build();
-			loginRepository.save(login);
+			User user = User.builder().name("name test").email("test@testLoginService2.com").build();
+			userRepository.save(user);
 
 			// action
-			loginService.validateEmail("test@testLoginService2.com");
+			userService.validateEmail("test@testLoginService2.com");
 		});
 	}
 }

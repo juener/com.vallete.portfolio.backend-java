@@ -1,7 +1,10 @@
-package com.vallete.portfolio.backendjava.model.entity;
+package com.vallete.portfolio.backendjava.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.UUID;
 
 import jakarta.persistence.Entity;
@@ -11,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +25,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "t_transaction")
 public class Transaction {
 
 	@Id
@@ -39,11 +44,13 @@ public class Transaction {
 	@Enumerated(value = EnumType.STRING)
 	private TransactionStatus status;
 	
-	private Date dueDate;
+
+	private LocalDate dueDate;
 	
-	private Date registrationDate;
+
+	private LocalDateTime creationDate;
 	
 	@ManyToOne
-	//@JoinColumn(name = id_login)
-	private Login login;
+	//@JoinColumn(name = id_user)
+	private User user;
 }

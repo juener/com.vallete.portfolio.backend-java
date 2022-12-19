@@ -7,24 +7,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.vallete.portfolio.backendjava.model.entity.Login;
+import com.vallete.portfolio.backendjava.model.User;
+import com.vallete.portfolio.backendjava.repository.UserRepository;
 
 //integration test
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
-public class LoginRepositoryTest {
+public class UserRepositoryTest {
 
 	@Autowired
-	LoginRepository loginRepository;
+	UserRepository userRepository;
 	
 	@Test
 	public void mustReturnTrueIfTheEmailExists() {
 		//scenario
-		Login login = Login.builder().name("nameTst").email("test@testLoginRepository.com").build();
+		User user= User.builder().name("nameTst").email("test@testLoginRepository.com").build();
 		
 		//execution
-		loginRepository.save(login);
-		boolean result = loginRepository.existsByEmail("test@testLoginRepository.com");
+		userRepository.save(user);
+		boolean result = userRepository.existsByEmail("test@testLoginRepository.com");
 		
 		//verification
 		Assertions.assertThat(result).isTrue();
