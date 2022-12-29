@@ -33,4 +33,6 @@ public class User {
 	
 	private LocalDateTime creationDate;
 
+	private String role;
+
 }

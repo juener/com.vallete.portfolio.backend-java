@@ -14,4 +14,6 @@ public interface UserControllerInterface {
 	void validateEmail(String email);
 	
 	User getUserById(UUID id);
+
+	User getUserByEmail(String email);
 }
