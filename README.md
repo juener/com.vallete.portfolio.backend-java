@@ -1,24 +1,24 @@
 # com.vallete.portfolio.backend-java
-*The following project is a part of a whole project, which the backend-java is
+*The following project is a part of a whole project, in which the backend-java is
 the provider of APIs being the layer to get and set data in our Postgresql database.*
 
-*The main goal of the project com.vallete.portfolio is create and turn the code
-available for intermediate developers, which with some knowledge is in a limbo
-between being a beginner and a next level software developer. The concept behind
-may applied in a real application with handling data, security and best practicies.*
+*The main goal of the project com.vallete.portfolio is to create and turn the code
+available for intermediate developers, which with some knowledge are in limbo
+between being a beginner and next-level software developer. The concept behind
+this may be applied in a real application with handling data, security and best practices.*
 
-*The project contains common usecases with iterations among posts, comments,
-billings and its partners.*
+*The project contains common use cases with iterations among posts, comments,
+billings, and partners.*
 
-## Tecnologies of the Full Project
+## Technologies of the Full Project
 - Java - Spring Boot as backend in a Tomcat server
 - React - NextJS as frontend in a Vercel server
-- Postgresql as database in a Linux server
+- Postgresql as the database in a Linux server
 
 **As uncoupled layers you are able to use any kind of server as Linux/Windows,
-Vercel/Netlify, Amazon or similar.*
+Vercel/Netlify, Amazon, or similar.*
 
-## Required components for backend and its versions
+## Required components for the backend and its versions
 | Software           | Version       |
 | -------------      |:-------------:|
 | JDK                | 19            |
@@ -32,7 +32,7 @@ Vercel/Netlify, Amazon or similar.*
   the password.
 
 ## Spring Boot
-- With the project opened in the IDE all the depencies will be automatically
+- With the project opened in the IDE all the dependencies will be automatically
   downloaded through Maven with no action needed.
 - Rename the file com.vallete.portfolio.backend-java\src\main\resources\application_properties_RENAME_IT
   to application.properties and make sure that the configurations are correct
@@ -55,8 +55,9 @@ Vercel/Netlify, Amazon or similar.*
    2. / [GET, POST, PUT, body and token are required]
    3. /{idTransaction} [DELETE, token is required]
 
-###### Only for reference
-![Some alt text.](/img/tst.png "alt message here")
+/*/*/*/*/*/*/*/
+###### Only for reference 
+![Some alt text.](https://website.vallete.com/_next/image?url=%2F_next%2Fstatic%2Fimage%2Fpublic%2Fimages%2Fhome%2FwhenStartedLarge.943d34f87ea1b4b03d0f272f60a8b1f2.png&w=750&q=75 "alt message here")
 
 Some link [text link](https://api.vallete.com/portfolio/ok)....
 
