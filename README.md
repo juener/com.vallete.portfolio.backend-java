@@ -41,19 +41,19 @@ Vercel/Netlify, Amazon, or similar.*
 
 ## Endpoints
 1. /portfolio
-1. /user
-   1. /register [POST]
-   2. /login [POST]
-   3. /{idUser}/balance [GET, token is required]
-2. /post
-   1. / [GET, token required]
-   2. / [POST, body and token are required]
-3. /comment
-   1. / [POST, body and token are required]
-4. /transaction
-   1. /ok [GET]
-   2. / [GET, POST, PUT, body and token are required]
-   3. /{idTransaction} [DELETE, token is required]
+   1. /user
+      1. /register [POST]
+      2. /login [POST]
+      3. /{idUser}/balance [GET, token is required]
+   2. /post
+      1. / [GET, token required]
+      2. / [POST, body and token are required]
+   3. /comment
+      1. / [POST, body and token are required]
+   4. /transaction
+      1. /ok [GET]
+      2. / [GET, POST, PUT, body and token are required]
+      3. /{idTransaction} [DELETE, token is required]
 
 /*/*/*/*/*/*/*/
 ###### Only for reference 
