@@ -5,6 +5,8 @@ import java.util.UUID;
 
 import com.vallete.portfolio.backendjava.model.User;
 
+import javax.swing.text.html.Option;
+
 public interface UserControllerInterface {
 
 	User authenticate(String email, String password);
@@ -15,5 +17,9 @@ public interface UserControllerInterface {
 	
 	User getUserById(UUID id);
 
-	User getUserByEmail(String email);
+	Optional<User> findById(UUID id);
+
+//	User getUserByEmail(String email);
+
+	Optional<User> findByEmail(String email);
 }

@@ -14,7 +14,7 @@ import com.vallete.portfolio.backendjava.model.Transaction;
 import com.vallete.portfolio.backendjava.model.TransactionType;
 import com.vallete.portfolio.backendjava.repository.TransactionRepository;
 
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 
 @Service
 public class TransactionController implements TransactionControllerInterface {

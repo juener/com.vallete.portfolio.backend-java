@@ -1,10 +1,10 @@
 spring.datasource.url=jdbc:postgresql://localhost:5432/portfolio
 spring.datasource.username=postgres
-spring.datasource.password=32d-e9f0-4dHH_
+spring.datasource.password=PASSWORD
 spring.datasource.driver-class-name=org.postgresql.Driver
 spring.jpa.show-sql=true
 spring.jpa.hibernate.ddl-auto=update
 server.servlet.context-path=/portfolio
 
 jwt.expiration-date=60
-jwt.signature-key=Y29tLnZhbGxldGUucG9ydGZvbGlvLmJhc2U2NC5UaGlzSXNUaGVQYXNzd29yZDg5QA==
+jwt.signature-key=BASE64SIGNATURE

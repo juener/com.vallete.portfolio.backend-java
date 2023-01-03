@@ -7,7 +7,7 @@ import com.vallete.portfolio.backendjava.exception.BusinessException;
 import com.vallete.portfolio.backendjava.model.Comment;
 import com.vallete.portfolio.backendjava.repository.CommentRepository;
 
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 
 @Service
 public class CommentController implements CommentControllerInterface {
