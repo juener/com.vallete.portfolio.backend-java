@@ -3,9 +3,6 @@ package com.vallete.portfolio.backendjava.controller;
 import java.util.Optional;
 import java.util.UUID;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -56,7 +53,6 @@ public class UserController implements UserControllerInterface {
 		if (userRepository.existsByEmail(email))
 			throw new BusinessException("There is already one user registered using this email.");
 	}
-
 
 	@Override
 	public User getUserById(UUID id){

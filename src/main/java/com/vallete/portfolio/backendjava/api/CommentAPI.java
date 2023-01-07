@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vallete.portfolio.backendjava.controller.CommentController;
 import com.vallete.portfolio.backendjava.controller.CommentControllerInterface;
 import com.vallete.portfolio.backendjava.controller.PostControllerInterface;
 import com.vallete.portfolio.backendjava.controller.UserControllerInterface;

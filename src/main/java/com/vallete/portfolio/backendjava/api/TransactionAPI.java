@@ -33,11 +33,14 @@ public class TransactionAPI {
 	private final TransactionControllerInterface transactionController;
 	private final UserControllerInterface userController;
 
-	@GetMapping("/ok")
+	@GetMapping("/")
+	public ResponseEntity ok(){ return ResponseEntity.ok("ok"); }
+
+    @GetMapping("/ok")
 	public ResponseEntity isItWorking() {
 		return ResponseEntity.ok("Yeah! That's OK! :)");
 	}
-	
+
 	@GetMapping("/transaction")
 	public ResponseEntity searchTransactionsUsingFilter(
 			// for all optionals, use @RequestParam java.util.Map<String, String> params

@@ -5,7 +5,7 @@ the provider of APIs being the layer to get and set data in our Postgresql datab
 *The main goal of the project com.vallete.portfolio is to create and turn the code
 available for intermediate developers, which with some knowledge are in limbo
 between being a beginner and next-level software developer. The concept behind
-this may be applied in a real application with handling data, security and best practices.*
+this may be applied in a real application with handling data, soft security and best practices.*
 
 *The project contains common use cases with iterations among posts, comments,
 billings, and partners.*
@@ -16,7 +16,7 @@ billings, and partners.*
 - Postgresql as the database in a Linux server
 
 **As uncoupled layers you are able to use any kind of server as Linux/Windows,
-Vercel/Netlify, Amazon, or similar.*
+Vercel/Netlify, Amazon, and similar.*
 
 ## Required components for the backend and its versions
 | Software           | Version       |
@@ -29,7 +29,7 @@ Vercel/Netlify, Amazon, or similar.*
 
 ## Postgresql
 - Open the Postgres PgAdmin and create a database called **portfolio** and save
-  the password.
+  its password.
 
 ## Spring Boot
 - With the project opened in the IDE all the dependencies will be automatically
@@ -71,3 +71,4 @@ alert(message);
 ```
 
 This is an `inline code`.
+use the https://markdownlivepreview.com/ to format the README.md

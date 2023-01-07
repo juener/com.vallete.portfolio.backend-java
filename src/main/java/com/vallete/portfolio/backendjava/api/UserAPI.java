@@ -49,20 +49,6 @@ public class UserAPI {
 		}
 	}
 
-//	@PostMapping("/user/authenticate")
-//	public ResponseEntity authenticate(@RequestBody UserDTO userDTO){
-//		authenticationManager.authenticate(
-//				new UsernamePasswordAuthenticationToken(userDTO.getEmail(), userDTO.getPassword())
-//		);
-//		final UserDetails userDetails = userDetailsService.loadUserByUsername(userDTO.getEmail());
-//
-//		if(userDetails == null){
-//			return  ResponseEntity.status(404).body("Credentials are forbidden.");
-//		}
-//
-//		return ResponseEntity.ok(null);
-//	}
-
 	@SuppressWarnings("unchecked")
 	@PostMapping("/user/register")
 	public ResponseEntity register(@RequestBody UserDTO userDTO) {
