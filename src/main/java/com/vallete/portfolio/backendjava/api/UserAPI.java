@@ -36,7 +36,7 @@ public class UserAPI {
 	@GetMapping
 	public ResponseEntity getMapping() {
 		return null;
-	}
+	} //tst
 
 	@PostMapping("/user/login")
 	public ResponseEntity<?> login(@RequestBody UserDTO userDTO) {
