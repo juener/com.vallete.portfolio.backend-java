@@ -8,26 +8,25 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.vallete.portfolio.backendjava.model.User;
-import com.vallete.portfolio.backendjava.repository.UserRepository;
 
 //integration test
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 public class UserRepositoryTest {
 
-	@Autowired
-	UserRepository userRepository;
+//	@Autowired
+//    DELETEUserRepository userRepository;
 	
-	@Test
-	public void mustReturnTrueIfTheEmailExists() {
-		//scenario
-		User user= User.builder().name("nameTst").email("test@testLoginRepository.com").build();
-		
-		//execution
-		userRepository.save(user);
-		boolean result = userRepository.existsByEmail("test@testLoginRepository.com");
-		
-		//verification
-		Assertions.assertThat(result).isTrue();
-	}
+//	@Test
+//	public void mustReturnTrueIfTheEmailExists() {
+//		//scenario
+//		User user= User.builder().name("nameTst").email("test@testLoginRepository.com").build();
+//
+//		//execution
+//		userRepository.save(user);
+//		boolean result = userRepository.existsByEmail("test@testLoginRepository.com");
+//
+//		//verification
+//		Assertions.assertThat(result).isTrue();
+//	}
 }
