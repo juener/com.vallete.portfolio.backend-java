@@ -1,28 +1,24 @@
 package com.vallete.portfolio.backendjava.config;
 
-import com.vallete.portfolio.backendjava.controller.UserController;
-import com.vallete.portfolio.backendjava.repository.UserRepository;
+import com.vallete.portfolio.backendjava.user.model.UserModel;
+import com.vallete.portfolio.backendjava.user.repository.UserRepository;
+import com.vallete.portfolio.backendjava.user.service.interfaces.UserInterface;
 import lombok.RequiredArgsConstructor;
-import com.vallete.portfolio.backendjava.model.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class SecurityUserDetailsService implements UserDetailsService {
-    //private final UserController userController;
-
     private final UserRepository userRepository;
-
     @Override
     public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-        Optional<User> userModel = userRepository.findById(UUID.fromString(id));
+        Optional<UserModel> userModel = userRepository.findById(UUID.fromString(id));
 
         if (userModel == null)
             throw new UsernameNotFoundException("User not registered.");
