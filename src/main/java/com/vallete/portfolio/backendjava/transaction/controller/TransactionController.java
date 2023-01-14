@@ -10,6 +10,7 @@ import com.vallete.portfolio.backendjava.user.model.UserModel;
 import com.vallete.portfolio.backendjava.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class TransactionController {
     private final TransactionService transactionService;
     private final UserService userService;
 
+    @PreAuthorize("token")
     @GetMapping("/ok")
     public ResponseEntity ok() {
         return ResponseEntity.ok("ok");
