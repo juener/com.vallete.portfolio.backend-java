@@ -8,14 +8,18 @@ import com.vallete.portfolio.backendjava.transaction.model.TransactionModel;
 import com.vallete.portfolio.backendjava.transaction.service.TransactionService;
 import com.vallete.portfolio.backendjava.user.model.UserModel;
 import com.vallete.portfolio.backendjava.user.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.vallete.portfolio.backendjava.shared.swagger.SwaggerConfig;
 
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+@Api( tags = "Clients")
 @RestController
 @RequestMapping("/transaction")
 @RequiredArgsConstructor
@@ -23,6 +27,7 @@ public class TransactionController {
     private final TransactionService transactionService;
     private final UserService userService;
 
+    @ApiOperation(value = "This method is used to get the clients.")
     @GetMapping("/ok")
     public ResponseEntity ok() {
         return ResponseEntity.ok("ok");
