@@ -14,17 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user/register")
 @RequiredArgsConstructor
 public class RegisterUserController {
-
     private final RegisterUserService registerUserService;
 
     @PostMapping
-    public ResponseEntity register(@RequestBody UserDTO userDTO){
-        UserModel userModel = UserModel.builder()
-                .name(userDTO.getName())
-                .email(userDTO.getEmail())
-                .password(userDTO.getPassword())
-                .build();
-
-        return ResponseEntity.ok(registerUserService.save(userModel));
+    public ResponseEntity saveUser(@RequestBody UserDTO userDTO){
+        return registerUserService.saveUser(userDTO);
     }
 }

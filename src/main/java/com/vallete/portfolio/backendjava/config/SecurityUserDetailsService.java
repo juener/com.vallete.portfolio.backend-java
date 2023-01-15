@@ -1,8 +1,7 @@
 package com.vallete.portfolio.backendjava.config;
 
 import com.vallete.portfolio.backendjava.user.model.UserModel;
-import com.vallete.portfolio.backendjava.user.repository.UserRepository;
-import com.vallete.portfolio.backendjava.user.service.interfaces.UserInterface;
+import com.vallete.portfolio.backendjava.user.repository.jpa.UserInterfaceRepositoryJPA;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,7 +14,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class SecurityUserDetailsService implements UserDetailsService {
-    private final UserRepository userRepository;
+    private final UserInterfaceRepositoryJPA userRepository;
     @Override
     public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
         Optional<UserModel> userModel = userRepository.findById(UUID.fromString(id));

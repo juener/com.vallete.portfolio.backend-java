@@ -1,4 +1,4 @@
-package com.vallete.portfolio.backendjava.user.repository;
+package com.vallete.portfolio.backendjava.user.repository.jpa;
 
 import com.vallete.portfolio.backendjava.shared.enumerated.TransactionType;
 import com.vallete.portfolio.backendjava.user.model.UserModel;
@@ -10,17 +10,12 @@ import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface UserRepository extends JpaRepository<UserModel, UUID> {
-
-    boolean existsByEmail(String email);
-
+public interface UserInterfaceRepositoryJPA extends JpaRepository<UserModel, UUID> {
+    //    boolean existsByEmail(String email);
+    //UserModel getUserByEmail(String email);
     Optional<UserModel> findByEmail(String email);
-
     Optional<UserModel> findById(UUID id);
-
     UserModel getUserById(UUID id);
-
-    UserModel getUserByEmail(String email);
 
     @Query(value =
             "select sum(T.value) from TransactionModel T join T.user U " +
@@ -31,5 +26,3 @@ public interface UserRepository extends JpaRepository<UserModel, UUID> {
             @Param("type") Enum<TransactionType> type
     );
 }
-/*"select sum(T.value) from Transaction T join T.user U " +
-                    "where U.id = :idUser and T.type = :type group by U"*/

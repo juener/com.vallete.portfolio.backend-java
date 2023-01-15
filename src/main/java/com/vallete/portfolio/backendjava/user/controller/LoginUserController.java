@@ -18,16 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class LoginUserController {
     private final LoginUserService loginUserService;
-    private final JwtInterface jwtInterface;
 
     @PostMapping
-    public ResponseEntity<?> login(@RequestBody UserDTO userDTO) {
-        try {
-            UserModel authenticatedLogin = loginUserService.login(userDTO.getEmail(), userDTO.getPassword());
-            JwtDTO jwtDTO = new JwtDTO("Bearer " + jwtInterface.generateToken(authenticatedLogin));
-            return ResponseEntity.ok(jwtDTO);
-        } catch (AuthenticationException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity login(@RequestBody UserDTO userDTO) {
+            return loginUserService.loginUser(userDTO);
     }
 }

@@ -19,7 +19,8 @@ public class BalanceUserController {
 
     @GetMapping("/user/{idUser}/balance")
     public ResponseEntity getBalance(@PathVariable("idUser") String idUser){
-        BigDecimal balance = balanceUserService.getBalanceByUserAndType(UUID.fromString(idUser));
+        //BigDecimal balance = balanceUserService.getBalanceByUserAndType(UUID.fromString(idUser));
+        String balance = "";
         return ResponseEntity.ok(balance);
     }
 }
