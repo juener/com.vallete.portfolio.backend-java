@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class RegisterUserRepository {
-
     @Autowired
     UserInterfaceRepositoryJPA userRepository;
 
@@ -24,9 +23,7 @@ public class RegisterUserRepository {
                     .build();
             return new ResponseEntity(userRepository.save(userModel), null, HttpStatus.OK);
         }catch (Exception e){
-            return new ResponseEntity("Error to save the user.\n\n" + e, null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity("Error saving the user.\n\n" + e, null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
-/*"select sum(T.value) from Transaction T join T.user U " +
-                    "where U.id = :idUser and T.type = :type group by U"*/

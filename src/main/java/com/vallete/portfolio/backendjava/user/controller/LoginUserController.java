@@ -1,10 +1,6 @@
 package com.vallete.portfolio.backendjava.user.controller;
 
-import com.vallete.portfolio.backendjava.config.JwtInterface;
-import com.vallete.portfolio.backendjava.config.JwtDTO;
-import com.vallete.portfolio.backendjava.shared.exception.AuthenticationException;
 import com.vallete.portfolio.backendjava.user.dto.UserDTO;
-import com.vallete.portfolio.backendjava.user.model.UserModel;
 import com.vallete.portfolio.backendjava.user.service.LoginUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +17,6 @@ public class LoginUserController {
 
     @PostMapping
     public ResponseEntity login(@RequestBody UserDTO userDTO) {
-            return loginUserService.loginUser(userDTO);
+        return loginUserService.loginUser(userDTO);
     }
 }

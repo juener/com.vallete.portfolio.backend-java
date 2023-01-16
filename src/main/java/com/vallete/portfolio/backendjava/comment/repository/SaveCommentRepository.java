@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class SaveCommentRepository {
-
     @Autowired
     CommentInterfaceRepositoryJPA commentRepositoryJPA;
 
@@ -28,8 +27,7 @@ public class SaveCommentRepository {
 
             return new ResponseEntity(commentRepositoryJPA.save(commentModel), null, HttpStatus.OK);
         }catch (Exception e){
-            return new ResponseEntity("Error creating commentary.", null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity("Error creating commentary.", null, HttpStatus.NOT_ACCEPTABLE);
         }
-
     }
 }

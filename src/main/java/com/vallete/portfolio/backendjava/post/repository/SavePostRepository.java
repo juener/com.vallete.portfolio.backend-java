@@ -26,7 +26,7 @@ public class SavePostRepository {
 
             return new ResponseEntity<>(postRepository.save(postModel), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Error to save the post.\n\n" + e,null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error saving the post.\n\n" + e,null, HttpStatus.NOT_ACCEPTABLE);
         }
     }
 }

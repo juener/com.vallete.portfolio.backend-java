@@ -18,7 +18,7 @@ public class LoginUserRepository {
         try {
             return userRepository.findByEmail(email);
         }catch (Exception e){
-            throw new DatabaseException("There was some error to fetch the user.\n\n" + e);
+            throw new DatabaseException("Error fetching the user.\n\n" + e);
         }
     }
 }

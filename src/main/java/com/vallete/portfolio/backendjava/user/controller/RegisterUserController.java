@@ -1,7 +1,6 @@
 package com.vallete.portfolio.backendjava.user.controller;
 
 import com.vallete.portfolio.backendjava.user.dto.UserDTO;
-import com.vallete.portfolio.backendjava.user.model.UserModel;
 import com.vallete.portfolio.backendjava.user.service.RegisterUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,7 @@ public class RegisterUserController {
     private final RegisterUserService registerUserService;
 
     @PostMapping
-    public ResponseEntity saveUser(@RequestBody UserDTO userDTO){
+    public ResponseEntity saveUser(@RequestBody UserDTO userDTO) {
         return registerUserService.saveUser(userDTO);
     }
 }

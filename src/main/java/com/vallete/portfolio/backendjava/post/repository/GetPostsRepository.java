@@ -15,7 +15,7 @@ public class GetPostsRepository {
         try{
             return new ResponseEntity<>(postRepository.findAll(), null, HttpStatus.OK);
         }catch (Exception e){
-            return new ResponseEntity<>("Error to get the posts. \n\n" + e, null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error getting posts. \n\n" + e, null, HttpStatus.NOT_ACCEPTABLE);
         }
     }
 }

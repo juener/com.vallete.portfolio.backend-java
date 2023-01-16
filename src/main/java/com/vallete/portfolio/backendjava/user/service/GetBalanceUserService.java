@@ -1,10 +1,9 @@
 package com.vallete.portfolio.backendjava.user.service;
 
-import com.vallete.portfolio.backendjava.shared.enumerated.TransactionType;
-import com.vallete.portfolio.backendjava.shared.exception.BusinessException;
+import com.vallete.portfolio.backendjava.user.repository.GetBalanceByUserRepository;
 import com.vallete.portfolio.backendjava.user.repository.RegisterUserRepository;
-import com.vallete.portfolio.backendjava.user.service.interfaces.BalanceUserInterface;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -12,8 +11,17 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class BalanceUserService {
-    private final RegisterUserRepository userRepository;
+public class GetBalanceUserService {
+    private final GetBalanceByUserRepository getBalanceByUserRepository;
+
+    /*to be implemented
+    public ResponseEntity getBalanceByUser(UUID idUser){
+        BigDecimal spent = ;
+        BigDecimal revenue = ;
+        BigDecimal balance;
+        return getBalanceByUser.get
+    }
+    */
     //@Override
     //public BigDecimal getBalanceByUserAndType(UUID idUser) {
         //if(userRepository.getUserById(idUser) == null)

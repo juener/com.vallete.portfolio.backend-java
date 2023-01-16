@@ -16,9 +16,10 @@ public class SaveTransactionRepository {
     @Autowired
     TransactionInterfaceRepositoryJPA transactionRepository;
 
-    public ResponseEntity saveTransaction(TransactionDTO transactionDTO, UserModel userModel){
-        try{
+    public ResponseEntity saveTransaction(TransactionDTO transactionDTO, UserModel userModel) {
+        try {
             TransactionModel transactionModel = TransactionModel.builder()
+                    .user(userModel)
                     .id(transactionDTO.getId())
                     .name(transactionDTO.getName())
                     .value(transactionDTO.getValue())
@@ -30,8 +31,8 @@ public class SaveTransactionRepository {
                     .build();
 
             return new ResponseEntity(transactionRepository.save(transactionModel), null, HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity("Error creating transaction.", null, HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            return new ResponseEntity("Error creating transaction." + e, null, HttpStatus.NOT_ACCEPTABLE);
         }
     }
 }

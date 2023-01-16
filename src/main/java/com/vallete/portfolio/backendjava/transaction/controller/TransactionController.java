@@ -29,12 +29,6 @@ public class TransactionController {
     private final SaveTransactionService saveTransactionService;
     private final DeleteTransactionService deleteTransactionService;
 
-    @PreAuthorize("token")
-    @GetMapping("/ok")
-    public ResponseEntity ok() {
-        return ResponseEntity.ok("ok");
-    }
-
     @GetMapping("/transaction")
     public ResponseEntity fetchTransactions(@RequestParam Map<String, String> params) {
         TransactionDTO transactionDTO = TransactionDTO.builder()

@@ -13,11 +13,11 @@ public class DeleteTransactionRepository {
     @Autowired
     TransactionInterfaceRepositoryJPA transactionRepository;
 
-    public ResponseEntity deleteTransaction(UUID id){
-        try{
+    public ResponseEntity deleteTransaction(UUID id) {
+        try {
             return new ResponseEntity("The transaction has been deleted.", null, HttpStatus.OK);
-        }catch (Exception e){
-         return new ResponseEntity("Error deleting transaction." + e, null, HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            return new ResponseEntity("Error deleting transaction." + e, null, HttpStatus.NOT_ACCEPTABLE);
         }
     }
 }

@@ -34,7 +34,7 @@ public class FetchTransactionsRepository {
 
             return new ResponseEntity(transactionRepository.findAll(example), null, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity("Some error occurred while trying to fetch data.", null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity("Some error occurred while trying to fetch data." + e, null, HttpStatus.NOT_ACCEPTABLE);
         }
     }
 }

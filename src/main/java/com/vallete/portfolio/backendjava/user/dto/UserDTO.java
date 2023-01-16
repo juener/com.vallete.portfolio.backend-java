@@ -14,14 +14,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO {
-
     private UUID id;
     private String email;
-
     private String name;
-
     private String password;
-
-    @Builder.Default
-    private LocalDateTime creationDate = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
+    private LocalDateTime creationDate;
 }

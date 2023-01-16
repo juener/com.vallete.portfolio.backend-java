@@ -17,7 +17,7 @@ public class DeletePostRepository {
             postRepository.deleteById(id);
             return new ResponseEntity("The post has been deleted.", null, HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity("Error to delete the post. \n\n" + e, null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity("Error deleting the post. \n\n" + e, null, HttpStatus.NOT_ACCEPTABLE);
         }
     }
 }

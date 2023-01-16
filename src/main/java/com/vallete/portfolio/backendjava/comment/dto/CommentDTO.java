@@ -14,16 +14,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommentDTO {
-
     private UUID id;
-
     private String body;
-
-    @Builder.Default
-    private LocalDateTime creationDate = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
-
+    private LocalDateTime creationDate;
     private UUID user;
-
     private UUID post;
-
 }
