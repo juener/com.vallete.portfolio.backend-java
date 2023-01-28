@@ -3,7 +3,6 @@ package com.vallete.portfolio.backendjava.transaction.service;
 import com.vallete.portfolio.backendjava.shared.exception.BusinessException;
 import com.vallete.portfolio.backendjava.transaction.repository.jpa.TransactionInterfaceRepositoryJPA;
 import com.vallete.portfolio.backendjava.transaction.model.TransactionModel;
-import com.vallete.portfolio.backendjava.transaction.service.interfaces.TransactionInterface;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -15,9 +14,9 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class TransactionService implements TransactionInterface {
+public class TransactionService {
     private final TransactionInterfaceRepositoryJPA transactionRepository;
-    @Override
+
     public List<TransactionModel> fetch(TransactionModel transactionFilter) {
         Example example = Example.of(
                 transactionFilter,
@@ -30,7 +29,6 @@ public class TransactionService implements TransactionInterface {
         return transactionRepository.findAll(example);
     }
 
-    @Override
     @Transactional
     public TransactionModel save(TransactionModel transactionModel) {
         validate(transactionModel);
@@ -42,7 +40,6 @@ public class TransactionService implements TransactionInterface {
             throw new BusinessException("You must fill the userId in the body of this request");
     }
 
-    @Override
     @Transactional
     public void deleteById(UUID id) {
         transactionRepository.deleteById(id);

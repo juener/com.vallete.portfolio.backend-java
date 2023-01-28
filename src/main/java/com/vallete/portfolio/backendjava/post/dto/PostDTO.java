@@ -18,7 +18,6 @@ public class PostDTO {
     private UUID id;
     private String title;
     private String body;
-    @Builder.Default
     private LocalDateTime creationDate;
     private UUID user;
 }
