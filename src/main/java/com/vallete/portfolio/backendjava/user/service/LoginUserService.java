@@ -1,10 +1,13 @@
 package com.vallete.portfolio.backendjava.user.service;
 
-import com.vallete.portfolio.backendjava.shared.exception.AuthenticationException;
+import com.vallete.portfolio.backendjava.config.JwtDTO;
+import com.vallete.portfolio.backendjava.config.JwtInterface;
+import com.vallete.portfolio.backendjava.user.dto.UserDTO;
 import com.vallete.portfolio.backendjava.user.model.UserModel;
-import com.vallete.portfolio.backendjava.user.repository.UserRepository;
-import com.vallete.portfolio.backendjava.user.service.interfaces.LoginUserInterface;
+import com.vallete.portfolio.backendjava.user.repository.LoginUserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,20 +15,28 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class LoginUserService implements LoginUserInterface {
-    private final UserRepository userRepository;
+public class LoginUserService {
+    private final LoginUserRepository loginUserRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtInterface jwtInterface;
 
-    @Override
-    public UserModel login(String email, String password) {
-        Optional<UserModel> userModel = userRepository.findByEmail(email);
 
-        if (!userModel.isPresent())
-            throw new AuthenticationException("This email is not registered yet.");
+    public ResponseEntity loginUser(UserDTO userDTO) {
+        try {
+            Optional<UserModel> optionalUserModel = loginUserRepository.findByEmail(userDTO.getEmail());
+            if (!optionalUserModel.isPresent())
+                return new ResponseEntity("This email is not registered yet.", null, HttpStatus.UNPROCESSABLE_ENTITY);
 
-        if (!passwordEncoder.matches(password, userModel.get().getPassword()))
-            throw new AuthenticationException("Password incorrect.");
+            UserModel userModel = optionalUserModel.get();
 
-        return userModel.get();
+            if (!passwordEncoder.matches(userDTO.getPassword(), userModel.getPassword()))
+                return new ResponseEntity("Password incorrect.", null, HttpStatus.FORBIDDEN);
+
+            JwtDTO jwtDTO = new JwtDTO("Bearer " + jwtInterface.generateToken(userModel));
+
+            return new ResponseEntity(jwtDTO, null, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity(e, null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
