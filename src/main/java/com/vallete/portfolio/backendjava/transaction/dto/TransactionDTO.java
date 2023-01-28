@@ -16,23 +16,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TransactionDTO {
-
     private UUID id;
-
     private String name;
-
     private String observation;
-
     private BigDecimal value;
-
     private UUID user;
-
     private String type;
-
     private String status;
-
     private LocalDate dueDate;
-
     @Builder.Default
     private LocalDateTime creationDate = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
 

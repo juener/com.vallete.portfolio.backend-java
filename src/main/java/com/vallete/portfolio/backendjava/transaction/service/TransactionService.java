@@ -1,7 +1,7 @@
 package com.vallete.portfolio.backendjava.transaction.service;
 
 import com.vallete.portfolio.backendjava.shared.exception.BusinessException;
-import com.vallete.portfolio.backendjava.transaction.repository.TransactionRepository;
+import com.vallete.portfolio.backendjava.transaction.repository.jpa.TransactionInterfaceRepositoryJPA;
 import com.vallete.portfolio.backendjava.transaction.model.TransactionModel;
 import com.vallete.portfolio.backendjava.transaction.service.interfaces.TransactionInterface;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class TransactionService implements TransactionInterface {
-    private final TransactionRepository transactionRepository;
+    private final TransactionInterfaceRepositoryJPA transactionRepository;
     @Override
     public List<TransactionModel> fetch(TransactionModel transactionFilter) {
         Example example = Example.of(

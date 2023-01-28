@@ -1,14 +1,12 @@
 package com.vallete.portfolio.backendjava.post.model;
 
 import com.vallete.portfolio.backendjava.user.model.UserModel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.UUID;
 
 @Entity
@@ -18,18 +16,17 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table(name = "t_post")
 public class PostModel {
-
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
-
+    @NonNull
     private String title;
-
+    @NonNull
     private String body;
-
-    private LocalDateTime creationDate;
-
+    @Builder.Default
+    private LocalDateTime creationDate = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
     @ManyToOne
+    @NonNull
     private UserModel user;
 }

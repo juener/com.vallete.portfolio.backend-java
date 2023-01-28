@@ -1,10 +1,6 @@
 package com.vallete.portfolio.backendjava.user.controller;
 
-import com.vallete.portfolio.backendjava.config.JwtInterface;
-import com.vallete.portfolio.backendjava.config.JwtDTO;
-import com.vallete.portfolio.backendjava.shared.exception.AuthenticationException;
 import com.vallete.portfolio.backendjava.user.dto.UserDTO;
-import com.vallete.portfolio.backendjava.user.model.UserModel;
 import com.vallete.portfolio.backendjava.user.service.LoginUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,16 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class LoginUserController {
     private final LoginUserService loginUserService;
-    private final JwtInterface jwtInterface;
 
     @PostMapping
-    public ResponseEntity<?> login(@RequestBody UserDTO userDTO) {
-        try {
-            UserModel authenticatedLogin = loginUserService.login(userDTO.getEmail(), userDTO.getPassword());
-            JwtDTO jwtDTO = new JwtDTO("Bearer " + jwtInterface.generateToken(authenticatedLogin));
-            return ResponseEntity.ok(jwtDTO);
-        } catch (AuthenticationException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity login(@RequestBody UserDTO userDTO) {
+        return loginUserService.loginUser(userDTO);
     }
 }
